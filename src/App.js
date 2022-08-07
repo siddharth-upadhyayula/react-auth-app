@@ -1,23 +1,60 @@
-import logo from './logo.svg';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import './App.css';
+import app from './components/firebase'
+import { useState } from "react";
 
 function App() {
+
+const auth = getAuth(app);
+
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+const signUp = () => {
+
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    alert("Successfully created Account")
+    // ...
+  })
+  .catch((error) => {
+    //const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage)
+    // ..
+  });
+
+}
+
+const signIn = () => {
+  const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    alert("Sign in Successful")
+    // ...
+  })
+  .catch((error) => {
+    //const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage)
+  });
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <div className="App">
+      <input type={"email"} placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)}/><br />
+      <input type={"password"} placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}/><br />
+      <br></br>
+      <button onClick={signUp}>Create Account</button>
+      <button onClick={signIn}>Sign in</button>
+      </div>
     </div>
   );
 }
