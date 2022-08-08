@@ -48,12 +48,13 @@ signInWithEmailAndPassword(auth, email, password)
 
   return (
     <div className="main">
+      <h1>Login Page</h1>
       <div className="App">
-      <input type={"email"} placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)}/><br />
-      <input type={"password"} placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}/><br />
+      <input type={"email"} className="email" placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)}/><br />
+      <input type={"password"} className="email" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}/><br />
       <br></br>
-      <button onClick={signUp}>Create Account</button>
-      <button onClick={signIn}>Sign in</button>
+      <button className="button" onClick={signUp}>Create Account</button>
+      <button className="button" onClick={signIn}>Sign in</button>
       </div>
     </div>
   );
